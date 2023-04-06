@@ -35,7 +35,9 @@ const UsuarioSchema = Schema({
 
 //Debe ser una funcion común, ya que va a hacer referencia a this, con funcion de fecha no funciona
 UsuarioSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario } = this.toObject();
+    //quita password y id, agrega usuario
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
 }
 
